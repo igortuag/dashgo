@@ -15,7 +15,7 @@ export default function Home() {
         <Input name="email" type="email" />
         <Input name="password" type="password" />
 
-        <Button type="submit" mt="6">
+        <Button type="submit" mt="6" colorScheme="pink">
           Login
         </Button>
       </Flex>
