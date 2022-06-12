@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Input, Text } from "@chakra-ui/react";
 
 export default function Header() {
   return (
@@ -18,6 +18,28 @@ export default function Header() {
           .
         </Text>
       </Text>
+
+      <Flex
+        as="label"
+        flex="1"
+        py="4"
+        px="8"
+        ml="6"
+        maxWidth={400}
+        alignSelf="center"
+        color="gray.200"
+        position="relative"
+        bg="gray.800"
+        borderRadius="full"
+      >
+        <Input
+          color="gray.50"
+          variant="unstyled"
+          px="4"
+          mx="4"
+          placeholder="Search in platform"
+        />
+      </Flex>
     </Flex>
   );
 }
