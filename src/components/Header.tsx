@@ -1,4 +1,5 @@
-import { Flex, Input, Text } from "@chakra-ui/react";
+import { Flex, Icon, Input, Text } from "@chakra-ui/react";
+import { RiSearchLine } from "react-icons/ri";
 
 export default function Header() {
   return (
@@ -39,6 +40,7 @@ export default function Header() {
           mx="4"
           placeholder="Search in platform"
         />
+        <Icon as={RiSearchLine} fontSize="20" />
       </Flex>
     </Flex>
   );
