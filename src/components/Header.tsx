@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 export default function Header() {
   return (
@@ -12,7 +12,12 @@ export default function Header() {
       px="6"
       align="center"
     >
-      <h1>Dashboard</h1>
+      <Text fontSize="3xl" fontWeight="bold" letterSpacing="tight" w="64">
+        dashgo
+        <Text as="span" ml="1" color="pink.500">
+          .
+        </Text>
+      </Text>
     </Flex>
   );
 }
