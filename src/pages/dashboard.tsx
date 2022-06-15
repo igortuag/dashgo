@@ -44,6 +44,15 @@ const options = {
       "2021-06-15T00:00:00.000Z",
     ],
   },
+  fill: {
+    opacity: 0.3,
+    type: "gradient",
+    gradient: {
+      shade: "dark",
+      opacityFrom: 0.7,
+      opacityTo: 0.3,
+    },
+  },
 };
 
 const series = [
@@ -68,15 +77,16 @@ export default function Dashboard() {
           alignItems="flex-start"
         >
           <Box p="8" bg="gray.800" borderRadius={8}>
-            <Text fontSize="lg" mb="4">
+            <Text fontSize="lg" mb="4" pb="4">
               Week subscribers
             </Text>
             <Chart options={options} series={series} type="area" height={160} />
           </Box>
           <Box p="8" bg="gray.800" borderRadius={8}>
-            <Text fontSize="lg" mb="4">
+            <Text fontSize="lg" mb="4" pb="4">
               Open rate
             </Text>
+            <Chart options={options} series={series} type="area" height={160} />
           </Box>
         </SimpleGrid>
       </Flex>
