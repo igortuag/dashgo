@@ -2,7 +2,13 @@ import { Button, Stack } from "@chakra-ui/react";
 
 export function Pagination() {
   return (
-    <Stack>
+    <Stack
+      direction="row"
+      mt="8"
+      justify="space-between"
+      align="center"
+      spacing="6"
+    >
       <Button
         size="sm"
         fontSize="xs"
