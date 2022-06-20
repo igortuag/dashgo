@@ -6,6 +6,7 @@ import {
 } from "react-icons/ri";
 import NotificationNav from "./NotificationNav";
 import Profile from "./Profile";
+import SearchBar from "./SearchBar";
 
 export default function Header() {
   return (
@@ -26,28 +27,7 @@ export default function Header() {
         </Text>
       </Text>
 
-      <Flex
-        as="label"
-        flex="1"
-        py="4"
-        px="8"
-        ml="6"
-        maxWidth={400}
-        alignSelf="center"
-        color="gray.200"
-        position="relative"
-        bg="gray.800"
-        borderRadius="full"
-      >
-        <Input
-          color="gray.50"
-          variant="unstyled"
-          px="4"
-          mx="4"
-          placeholder="Search in platform"
-        />
-        <Icon as={RiSearchLine} fontSize="20" />
-      </Flex>
+      <SearchBar />
 
       <Flex align="center" ml="auto">
         <NotificationNav />
