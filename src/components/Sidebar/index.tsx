@@ -1,10 +1,11 @@
-import { Box, Icon, Link, Stack, Text } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import {
   RiContactsLine,
   RiDashboardLine,
   RiGitMergeLine,
   RiInputMethodLine,
 } from "react-icons/ri";
+import NavLink from "./NavLink";
 import NavSection from "./NavSection";
 
 export default function Sidebar() {
@@ -12,33 +13,13 @@ export default function Sidebar() {
     <Box as="aside" w="64" mr="8">
       <Stack spacing="12" align="flex-start">
         <NavSection title="GENERAL">
-          <Link display="flex" alignItems="center">
-            <Icon as={RiDashboardLine} fontSize="20" />
-            <Text ml="4" fontWeight="medium">
-              Dashboard
-            </Text>
-          </Link>
-          <Link display="flex" alignItems="center">
-            <Icon as={RiContactsLine} fontSize="20" />
-            <Text ml="4" fontWeight="medium">
-              Users
-            </Text>
-          </Link>
+          <NavLink icon={RiDashboardLine}>Dashboard</NavLink>
+          <NavLink icon={RiContactsLine}>Users</NavLink>
         </NavSection>
 
         <NavSection title="AUTOMATION">
-          <Link display="flex" alignItems="center">
-            <Icon as={RiInputMethodLine} fontSize="20" />
-            <Text ml="4" fontWeight="medium">
-              Forms
-            </Text>
-          </Link>
-          <Link display="flex" alignItems="center">
-            <Icon as={RiGitMergeLine} fontSize="20" />
-            <Text ml="4" fontWeight="medium">
-              Automation
-            </Text>
-          </Link>
+          <NavLink icon={RiInputMethodLine}>Forms</NavLink>
+          <NavLink icon={RiGitMergeLine}>Automation</NavLink>
         </NavSection>
       </Stack>
     </Box>
