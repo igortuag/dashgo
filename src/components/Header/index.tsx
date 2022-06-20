@@ -4,6 +4,7 @@ import {
   RiSearchLine,
   RiUserAddLine,
 } from "react-icons/ri";
+import Logo from "./Logo";
 import NotificationNav from "./NotificationNav";
 import Profile from "./Profile";
 import SearchBar from "./SearchBar";
@@ -20,12 +21,7 @@ export default function Header() {
       px="6"
       align="center"
     >
-      <Text fontSize="3xl" fontWeight="bold" letterSpacing="tight" w="64">
-        dashgo
-        <Text as="span" ml="1" color="pink.500">
-          .
-        </Text>
-      </Text>
+      <Logo />
 
       <SearchBar />
 
