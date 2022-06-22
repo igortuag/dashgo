@@ -23,7 +23,7 @@ export default function Header() {
     >
       <Logo />
 
-      <SearchBar />
+      {isWideVersion && <SearchBar />}
 
       <Flex align="center" ml="auto">
         <NotificationNav />
