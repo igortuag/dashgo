@@ -12,6 +12,7 @@ import {
   Th,
   Thead,
   Tr,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import Header from "../../components/Header";
@@ -19,6 +20,11 @@ import { Pagination } from "../../components/Pagination";
 import Sidebar from "../../components/Sidebar";
 
 export default function UserList() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true,
+  });
+
   return (
     <Box>
       <Header />
@@ -50,7 +56,7 @@ export default function UserList() {
                   <Checkbox colorScheme="pink" />
                 </Th>
                 <Th>User</Th>
-                <Th>Created at</Th>
+                {isWideVersion && <Th>Created at</Th>}
                 <Th width="8"></Th>
               </Tr>
             </Thead>
@@ -67,7 +73,7 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>June 1, 2022</Td>
+                {isWideVersion && <Td>June 1, 2022</Td>}
                 <Td>
                   <Button
                     as="a"
@@ -92,7 +98,7 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>June 1, 2022</Td>
+                {isWideVersion && <Td>June 1, 2022</Td>}
                 <Td>
                   <Button
                     as="a"
@@ -117,7 +123,7 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>June 1, 2022</Td>
+                {isWideVersion && <Td>June 1, 2022</Td>}
                 <Td>
                   <Button
                     as="a"
@@ -142,7 +148,7 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>June 1, 2022</Td>
+                {isWideVersion && <Td>June 1, 2022</Td>}
                 <Td>
                   <Button
                     as="a"
@@ -167,7 +173,7 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                <Td>June 1, 2022</Td>
+                {isWideVersion && <Td>June 1, 2022</Td>}
                 <Td>
                   <Button
                     as="a"
