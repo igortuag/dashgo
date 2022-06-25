@@ -74,17 +74,19 @@ export default function UserList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>June 1, 2022</Td>}
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    fontSize="sm"
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
-                  >
-                    Edit
-                  </Button>
-                </Td>
+                {isWideVersion && (
+                  <Td>
+                    <Button
+                      as="a"
+                      size="sm"
+                      fontSize="sm"
+                      colorScheme="purple"
+                      leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
+                    >
+                      Edit
+                    </Button>
+                  </Td>
+                )}
               </Tr>
               <Tr>
                 <Td px={["4", "4", "6"]}>
@@ -99,17 +101,19 @@ export default function UserList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>June 1, 2022</Td>}
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    fontSize="sm"
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
-                  >
-                    Edit
-                  </Button>
-                </Td>
+                {isWideVersion && (
+                  <Td>
+                    <Button
+                      as="a"
+                      size="sm"
+                      fontSize="sm"
+                      colorScheme="purple"
+                      leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
+                    >
+                      Edit
+                    </Button>
+                  </Td>
+                )}
               </Tr>
               <Tr>
                 <Td px={["4", "4", "6"]}>
@@ -124,17 +128,19 @@ export default function UserList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>June 1, 2022</Td>}
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    fontSize="sm"
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
-                  >
-                    Edit
-                  </Button>
-                </Td>
+                {isWideVersion && (
+                  <Td>
+                    <Button
+                      as="a"
+                      size="sm"
+                      fontSize="sm"
+                      colorScheme="purple"
+                      leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
+                    >
+                      Edit
+                    </Button>
+                  </Td>
+                )}
               </Tr>
               <Tr>
                 <Td px={["4", "4", "6"]}>
@@ -149,17 +155,19 @@ export default function UserList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>June 1, 2022</Td>}
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    fontSize="sm"
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
-                  >
-                    Edit
-                  </Button>
-                </Td>
+                {isWideVersion && (
+                  <Td>
+                    <Button
+                      as="a"
+                      size="sm"
+                      fontSize="sm"
+                      colorScheme="purple"
+                      leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
+                    >
+                      Edit
+                    </Button>
+                  </Td>
+                )}
               </Tr>
               <Tr>
                 <Td px={["4", "4", "6"]}>
@@ -174,17 +182,19 @@ export default function UserList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>June 1, 2022</Td>}
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    fontSize="sm"
-                    colorScheme="purple"
-                    leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
-                  >
-                    Edit
-                  </Button>
-                </Td>
+                {isWideVersion && (
+                  <Td>
+                    <Button
+                      as="a"
+                      size="sm"
+                      fontSize="sm"
+                      colorScheme="purple"
+                      leftIcon={<Icon as={RiPencilLine} fontSize={16} />}
+                    >
+                      Edit
+                    </Button>
+                  </Td>
+                )}
               </Tr>
             </Tbody>
           </Table>
