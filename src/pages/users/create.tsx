@@ -27,7 +27,7 @@ export default function UserCreate() {
 
           <Divider my="6" borderColor="gray.700" />
 
-          <VStack spacing="8">
+          <VStack spacing={["6", "8"]}>
             <SimpleGrid minChildWidth="240px" spacing="8" w="100%">
               <Input name="name" label="Name" placeholder="Full name" />
               <Input
@@ -38,7 +38,7 @@ export default function UserCreate() {
               />
             </SimpleGrid>
 
-            <SimpleGrid minChildWidth="240px" spacing="8" w="100%">
+            <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
               <Input name="password" label="Password" type="password" />
               <Input
                 name="password_confirmation"
