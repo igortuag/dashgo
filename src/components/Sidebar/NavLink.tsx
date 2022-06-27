@@ -8,9 +8,9 @@ interface NavLinkProps extends LinkProps {
   href: string;
 }
 
-function NavLink({ icon, children, ...rest }: NavLinkProps) {
+function NavLink({ icon, children, href, ...rest }: NavLinkProps) {
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <ChakraLink display="flex" alignItems="center" {...rest}>
         <Icon as={icon} fontSize="20" />
         <Text ml="4" fontWeight="medium">
