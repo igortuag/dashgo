@@ -1,4 +1,5 @@
 import Link, { LinkProps } from "next/link";
+import { useRouter } from "next/router";
 import { cloneElement, ReactElement } from "react";
 
 interface ActiveLinkProps extends LinkProps {
@@ -6,7 +7,13 @@ interface ActiveLinkProps extends LinkProps {
 }
 
 export default function ActiveLink({ children, ...rest }: ActiveLinkProps) {
-  const isActive = true;
+  const { asPath } = useRouter();
+
+  let isActive = false;
+
+  if (asPath === rest.href || asPath === rest.as) {
+    isActive = true;
+  }
 
   return (
     <Link {...rest}>
