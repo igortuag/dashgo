@@ -1,8 +1,10 @@
 import { Flex, Icon, Input } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 
 function SearchBar() {
+  const [search, setSearch] = useState("");
+
   return (
     <Flex
       as="label"
@@ -23,6 +25,8 @@ function SearchBar() {
         px="4"
         mx="4"
         placeholder="Search in platform"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
       <Icon as={RiSearchLine} fontSize="20" />
     </Flex>
