@@ -1,15 +1,20 @@
 import { Button, Flex, Stack } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { Input } from "../components/Form/Input";
+
+type SignInFormData = {
+  email: string;
+  password: string;
+};
 
 export default function SignIn() {
   const { push } = useRouter();
   const { register, handleSubmit } = useForm();
 
-  function handleSignIn(values) {
+  const handleSignIn: SubmitHandler<SignInFormData> = (values) => {
     console.log("values", values);
-  }
+  };
 
   return (
     <Flex w="100vw" h="100vh" align="center" justify="center">
