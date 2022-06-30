@@ -10,7 +10,7 @@ type SignInFormData = {
 
 export default function SignIn() {
   const { push } = useRouter();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState } = useForm();
 
   const handleSignIn: SubmitHandler<SignInFormData> = (values) => {
     console.log("values", values);
@@ -43,7 +43,13 @@ export default function SignIn() {
           />
         </Stack>
 
-        <Button type="submit" mt="6" colorScheme="pink" size="lg">
+        <Button
+          type="submit"
+          mt="6"
+          colorScheme="pink"
+          size="lg"
+          isLoading={formState.isSubmitting}
+        >
           Login
         </Button>
       </Flex>
