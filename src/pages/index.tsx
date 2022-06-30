@@ -7,9 +7,8 @@ export default function SignIn() {
   const { push } = useRouter();
   const { register, handleSubmit } = useForm();
 
-  function handleSignIn(event) {
-    event.preventDefault();
-    push("/dashboard");
+  function handleSignIn(values) {
+    console.log("values", values);
   }
 
   return (
@@ -22,7 +21,7 @@ export default function SignIn() {
         p="8"
         borderRadius={8}
         flexDir="column"
-        onSubmit={handleSignIn}
+        onSubmit={handleSubmit(handleSignIn)}
       >
         <Stack spacing={4}>
           <Input
