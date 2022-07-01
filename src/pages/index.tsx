@@ -11,6 +11,7 @@ type SignInFormData = {
 export default function SignIn() {
   const { push } = useRouter();
   const { register, handleSubmit, formState } = useForm();
+  const { errors } = formState;
 
   const handleSignIn: SubmitHandler<SignInFormData> = (values) => {
     console.log("values", values);
@@ -33,6 +34,7 @@ export default function SignIn() {
             name="email"
             label="Email"
             type="email"
+            error={errors.email}
             {...register("email", {
               required: "Email is required",
             })}
@@ -41,6 +43,7 @@ export default function SignIn() {
             name="password"
             label="Password"
             type="password"
+            error={errors.password}
             {...register("password", {
               required: "Email is required",
             })}
