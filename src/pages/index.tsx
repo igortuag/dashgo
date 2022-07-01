@@ -33,13 +33,17 @@ export default function SignIn() {
             name="email"
             label="Email"
             type="email"
-            {...register("email")}
+            {...register("email", {
+              required: "Email is required",
+            })}
           />
           <Input
             name="password"
             label="Password"
             type="password"
-            {...register("password")}
+            {...register("password", {
+              required: "Email is required",
+            })}
           />
         </Stack>
 
