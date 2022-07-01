@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input as ChakraInput,
   InputProps as ChakraInputProps,
@@ -33,6 +34,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         size="lg"
         {...rest}
       />
+
+      {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
     </FormControl>
   );
 };
