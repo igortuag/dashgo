@@ -39,6 +39,16 @@ const CreateUserFormSchema = yup.object().shape({
 });
 
 export default function UserCreate() {
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(CreateUserFormSchema),
+  });
+
+  const { errors } = formState;
+
+  const handleCreateUser: SubmitHandler<CreateUserFormData> = (values) => {
+    console.log("values", values);
+  };
+
   return (
     <Box>
       <Header />
@@ -46,7 +56,14 @@ export default function UserCreate() {
       <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
         <Sidebar />
 
-        <Box flex="1" borderRadius={8} bg="gray.800" p={["6", "8"]}>
+        <Box
+          as="form"
+          flex="1"
+          borderRadius={8}
+          bg="gray.800"
+          p={["6", "8"]}
+          onSubmit={handleSubmit(handleCreateUser)}
+        >
           <Heading size="lg" fontWeight="normal">
             Create User
           </Heading>
