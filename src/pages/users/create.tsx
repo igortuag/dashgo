@@ -12,6 +12,31 @@ import Link from "next/link";
 import { Input } from "../../components/Form/Input";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+type CreateUserFormData = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+const CreateUserFormSchema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Email must be a valid"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters"),
+  password_confirmation: yup
+    .string()
+    .oneOf([null, yup.ref("password")], "Passwords must match"),
+});
 
 export default function UserCreate() {
   return (
