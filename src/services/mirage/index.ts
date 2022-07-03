@@ -20,6 +20,7 @@ export function makeServer() {
       this.post("/users");
 
       this.namespace = "";
+      this.passthrough();
     },
   });
 
