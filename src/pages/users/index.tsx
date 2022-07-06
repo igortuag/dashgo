@@ -28,7 +28,14 @@ export default function UserList() {
     const response = await fetch("http://localhost:3000/api/users");
     const json = await response.json();
 
-    return json;
+    const users = json.users.map((user) => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      createdAt: new Date(user.created_at).toLocaleDateString(),
+    }));
+
+    return users;
   });
 
   const isWideVersion = useBreakpointValue({
@@ -84,7 +91,7 @@ export default function UserList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.users.map((user) => (
+                  {data.map((user) => (
                     <Tr key={user.id}>
                       <Td px={["4", "4", "6"]}>
                         <Checkbox colorScheme="pink" />
