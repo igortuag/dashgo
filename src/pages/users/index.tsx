@@ -32,7 +32,11 @@ export default function UserList() {
       id: user.id,
       name: user.name,
       email: user.email,
-      createdAt: new Date(user.created_at).toLocaleDateString(),
+      createdAt: new Date(user.created_at).toLocaleDateString("en-US", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }),
     }));
 
     return users;
