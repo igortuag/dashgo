@@ -16,7 +16,6 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useEffect } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import Header from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
@@ -24,23 +23,29 @@ import Sidebar from "../../components/Sidebar";
 import { useQuery } from "react-query";
 
 export default function UserList() {
-  const { data, isLoading, error } = useQuery("users", async () => {
-    const response = await fetch("http://localhost:3000/api/users");
-    const json = await response.json();
+  const { data, isLoading, error } = useQuery(
+    "users",
+    async () => {
+      const response = await fetch("http://localhost:3000/api/users");
+      const json = await response.json();
 
-    const users = json.users.map((user) => ({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      createdAt: new Date(user.created_at).toLocaleDateString("en-US", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      }),
-    }));
+      const users = json.users.map((user) => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        createdAt: new Date(user.created_at).toLocaleDateString("en-US", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        }),
+      }));
 
-    return users;
-  });
+      return users;
+    },
+    {
+      staleTime: 5000,
+    }
+  );
 
   const isWideVersion = useBreakpointValue({
     base: false,
