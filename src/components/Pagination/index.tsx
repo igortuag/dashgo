@@ -5,15 +5,17 @@ interface PaginationProps {
   totalCountRegisters: number;
   registersPerPage?: number;
   currentPage?: number;
-  onChangePage?: (page: number) => void;
+  onChangePage: (page: number) => void;
 }
 
 export function Pagination({
   totalCountRegisters,
-  registersPerPage,
-  currentPage,
+  registersPerPage = 10,
+  currentPage = 1,
   onChangePage,
 }: PaginationProps) {
+  const lastPage = Math.ceil(totalCountRegisters / registersPerPage);
+
   return (
     <Stack
       direction={["column", "row"]}
