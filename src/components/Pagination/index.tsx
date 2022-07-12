@@ -8,6 +8,14 @@ interface PaginationProps {
   onChangePage: (page: number) => void;
 }
 
+const siblingsCount = 1;
+
+function generatePagesArray(from: number, to: number) {
+  return [...new Array(to - from)]
+    .map((_, index) => from + index)
+    .filter((page) => page > 0);
+}
+
 export function Pagination({
   totalCountRegisters,
   registersPerPage = 10,
@@ -15,6 +23,19 @@ export function Pagination({
   onChangePage,
 }: PaginationProps) {
   const lastPage = Math.ceil(totalCountRegisters / registersPerPage);
+
+  const previousPages =
+    currentPage > 1
+      ? generatePagesArray(currentPage - 1 - siblingsCount, currentPage - 1)
+      : [];
+
+  const nextPages =
+    currentPage > 1
+      ? generatePagesArray(
+          currentPage,
+          Math.min(currentPage + siblingsCount, lastPage)
+        )
+      : [];
 
   return (
     <Stack
