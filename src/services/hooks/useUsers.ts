@@ -8,8 +8,12 @@ type User = {
   createdAt: string;
 };
 
-export async function getUsers(): Promise<User[]> {
-  const { data } = await api.get("/users");
+export async function getUsers(page: number): Promise<User[]> {
+  const { data } = await api.get("/users", {
+    params: {
+      page,
+    },
+  });
 
   const users = data.users.map((user) => ({
     id: user.id,
@@ -25,8 +29,8 @@ export async function getUsers(): Promise<User[]> {
   return users;
 }
 
-export default function useUsers() {
-  return useQuery("users", getUsers, {
+export default function useUsers(page: number) {
+  return useQuery("users", () => getUsers(page), {
     staleTime: 5000,
   });
 }
