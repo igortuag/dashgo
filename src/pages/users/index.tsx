@@ -23,6 +23,7 @@ import Header from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import Sidebar from "../../components/Sidebar";
 import useUsers from "../../services/hooks/useUsers";
+import { queryClient } from "../../services/queryClient";
 
 export default function UserList() {
   const [page, setPage] = useState(1);
@@ -33,7 +34,9 @@ export default function UserList() {
     lg: true,
   });
 
-  const handlePrefetchUser = () => {};
+  function handlePrefetchUser(userId: number) {
+    await queryClient;
+  }
 
   return (
     <Box>
@@ -95,7 +98,7 @@ export default function UserList() {
                         <Box>
                           <Link
                             color="purple.400"
-                            onMouseEnter={() => handlePrefetchUser()}
+                            onMouseEnter={() => handlePrefetchUser(user.id)}
                           >
                             <Text fontWeight="bold">{user.name}</Text>
                           </Link>
