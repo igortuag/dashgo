@@ -22,6 +22,7 @@ import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import Header from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import Sidebar from "../../components/Sidebar";
+import { api } from "../../services/api";
 import useUsers from "../../services/hooks/useUsers";
 import { queryClient } from "../../services/queryClient";
 
@@ -34,8 +35,12 @@ export default function UserList() {
     lg: true,
   });
 
-  function handlePrefetchUser(userId: number) {
-    await queryClient;
+  async function handlePrefetchUser(userId: number) {
+    await queryClient.prefetchQuery(["user", userId], async () => {
+      const response = await api.get(`users/${userId}`);
+
+      return response.data;
+    });
   }
 
   return (
