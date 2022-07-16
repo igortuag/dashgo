@@ -48,6 +48,8 @@ export default function UserCreate() {
         created_at: new Date(),
       },
     });
+
+    return response.data.user;
   });
 
   const { register, handleSubmit, formState } = useForm({
@@ -56,8 +58,10 @@ export default function UserCreate() {
 
   const { errors } = formState;
 
-  const handleCreateUser: SubmitHandler<CreateUserFormData> = (values) => {
-    console.log("values", values);
+  const handleCreateUser: SubmitHandler<CreateUserFormData> = async (
+    values
+  ) => {
+    await createUser.mutateAsync(values);
   };
 
   return (
