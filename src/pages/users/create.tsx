@@ -18,6 +18,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "react-query";
 import { api } from "../../services/api";
 import { queryClient } from "../../services/queryClient";
+import { useRouter } from "next/router";
 
 type CreateUserFormData = {
   name: string;
@@ -42,6 +43,8 @@ const CreateUserFormSchema = yup.object().shape({
 });
 
 export default function UserCreate() {
+  const { push } = useRouter();
+
   const createUser = useMutation(
     async (user: CreateUserFormData) => {
       const response = await api.post("users", {
@@ -70,6 +73,8 @@ export default function UserCreate() {
     values
   ) => {
     await createUser.mutateAsync(values);
+
+    push("/users");
   };
 
   return (
