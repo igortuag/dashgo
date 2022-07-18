@@ -16,6 +16,7 @@ import {
   Tr,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import NextLink from "next/link";
 import { useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
@@ -148,3 +149,9 @@ export default function UserList() {
     </Box>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};
