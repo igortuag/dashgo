@@ -1,7 +1,13 @@
 import { createContext } from "react";
 
-type AuthContextData = {
-  signIn(credentials): Promise<void>;
+type SignInCredentials = {
+  email: string;
+  password: string;
 };
 
-const AuthContext = createContext({});
+type AuthContextData = {
+  signIn(credentials: SignInCredentials): Promise<void>;
+  isAuthenticated(): boolean;
+};
+
+const AuthContext = createContext({} as AuthContextData);
