@@ -28,8 +28,8 @@ export default function SignIn() {
   });
   const { errors } = formState;
 
-  const handleSignIn: SubmitHandler<SignInFormData> = (values) => {
-    signIn(values);
+  const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
+    await signIn(values);
   };
 
   return (
