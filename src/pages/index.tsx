@@ -4,6 +4,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Input } from "../components/Form/Input";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 type SignInFormData = {
   email: string;
@@ -19,6 +21,8 @@ const signInFormSchema = yup.object().shape({
 });
 
 export default function SignIn() {
+  const {} = useContext(AuthContext);
+
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(signInFormSchema),
   });

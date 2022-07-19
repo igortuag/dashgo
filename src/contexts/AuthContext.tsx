@@ -10,7 +10,7 @@ type AuthContextData = {
   isAuthenticated(): boolean;
 };
 
-const AuthContext = createContext({} as AuthContextData);
+export const AuthContext = createContext({} as AuthContextData);
 
 type AuthProviderProps = {
   children: ReactNode;
