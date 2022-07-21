@@ -28,7 +28,7 @@ type User = {
 export function AuthProvider({ children }: AuthProviderProps) {
   const { push } = useRouter();
   const [user, setUser] = useState<User>();
-  const isAuthenticated = () => false;
+  const isAuthenticated = () => !!user;
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
