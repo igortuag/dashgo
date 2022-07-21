@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useState } from "react";
 import { apiAuth } from "../services/apiAuth";
 
 type SignInCredentials = {
@@ -17,7 +17,14 @@ type AuthProviderProps = {
   children: ReactNode;
 };
 
+type User = {
+  email: string;
+  password: string[];
+  roles: string[];
+};
+
 export function AuthProvider({ children }: AuthProviderProps) {
+  const [user, setUser] = useState<User>();
   const isAuthenticated = () => false;
 
   async function signIn({ email, password }: SignInCredentials) {
