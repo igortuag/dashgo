@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { createContext, ReactNode, useState } from "react";
 import { apiAuth } from "../services/apiAuth";
 
@@ -24,6 +25,7 @@ type User = {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  const { push } = useRouter();
   const [user, setUser] = useState<User>();
   const isAuthenticated = () => false;
 
@@ -41,6 +43,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         permissions,
         roles,
       });
+
+      push("/dashboard");
     } catch (error) {
       console.error(error);
     }
