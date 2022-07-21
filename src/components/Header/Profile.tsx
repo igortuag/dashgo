@@ -9,6 +9,10 @@ interface ProfileProps {
 function Profile({ showProfileData }: ProfileProps) {
   const { user } = useContext(AuthContext);
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <Flex>
       {showProfileData && (
