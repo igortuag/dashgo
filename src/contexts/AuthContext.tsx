@@ -20,6 +20,7 @@ type AuthProviderProps = {
 };
 
 type User = {
+  name: string;
   email: string;
   permissions: string[];
   roles: string[];
@@ -37,9 +38,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password,
       });
 
-      const { permissions, roles } = response.data;
+      const { permissions, roles, name } = response.data;
 
       setUser({
+        name,
         email,
         permissions,
         roles,
