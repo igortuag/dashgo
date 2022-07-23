@@ -22,7 +22,7 @@ type AuthProviderProps = {
 };
 
 type User = {
-  name: string;
+  name?: string;
   email: string;
   permissions: string[];
   roles: string[];
@@ -38,7 +38,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if (token) {
       api.get("me").then((response) => {
-        console.log("response", response);
+        const { email, permissions, roles } = response.data;
+
+        setUser({ email, permissions, roles });
       });
     }
   }, []);
