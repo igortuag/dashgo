@@ -70,6 +70,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         roles,
       });
 
+      api.defaults.headers["Authorization"] = `Bearer ${token}`;
+
       push("/dashboard");
     } catch (error) {
       console.error(error);
