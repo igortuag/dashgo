@@ -1,7 +1,9 @@
 import axios, { AxiosError } from "axios";
 import { parseCookies, setCookie } from "nookies";
 import { api } from "./api";
+
 let cookies = parseCookies();
+let isRefreshing = false;
 
 export const apiAuth = axios.create({
   baseURL: "http://localhost:3333/api",
@@ -19,26 +21,30 @@ apiAuth.interceptors.response.use(
 
         const { "nextauth.refreshToken": refreshToken } = cookies;
 
-        api
-          .post("/refresh", {
-            refreshToken,
-          })
-          .then((response) => {
-            const { token } = response.data;
-            setCookie(undefined, "nextauth", token, {
-              maxAge: 60 * 60 * 24 * 30, // 30 days
-              path: "/",
-            });
-            setCookie(
-              undefined,
-              "nextauth.refreshtoken",
-              response.data.refreshToken,
-              {
+        if (!refreshToken) {
+          isRefreshing = true;
+
+          api
+            .post("/refresh", {
+              refreshToken,
+            })
+            .then((response) => {
+              const { token } = response.data;
+              setCookie(undefined, "nextauth", token, {
                 maxAge: 60 * 60 * 24 * 30, // 30 days
                 path: "/",
-              }
-            );
-          });
+              });
+              setCookie(
+                undefined,
+                "nextauth.refreshtoken",
+                response.data.refreshToken,
+                {
+                  maxAge: 60 * 60 * 24 * 30, // 30 days
+                  path: "/",
+                }
+              );
+            });
+        }
       } else {
         window.location.href = "/login";
       }
