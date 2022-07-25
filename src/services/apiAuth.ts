@@ -4,6 +4,7 @@ import { api } from "./api";
 
 let cookies = parseCookies();
 let isRefreshing = false;
+let failedRequestQueue: any[] = [];
 
 export const apiAuth = axios.create({
   baseURL: "http://localhost:3333/api",
@@ -20,6 +21,7 @@ apiAuth.interceptors.response.use(
         cookies = parseCookies();
 
         const { "nextauth.refreshToken": refreshToken } = cookies;
+        const originalConfig = error.config;
 
         if (!refreshToken) {
           isRefreshing = true;
@@ -45,6 +47,19 @@ apiAuth.interceptors.response.use(
               );
             });
         }
+
+        return new Promise((resolve, reject) => {
+          failedRequestQueue.push({
+            onSuccess: (token: string) => {
+              originalConfig.headers["Authorization"] = `Bearer ${token}`;
+
+              resolve(apiAuth(originalConfig));
+            },
+            onFailure: (err: AxiosError) => {
+              reject(err);
+            },
+          });
+        });
       } else {
         window.location.href = "/login";
       }
