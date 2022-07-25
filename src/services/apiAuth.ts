@@ -32,10 +32,12 @@ apiAuth.interceptors.response.use(
             })
             .then((response) => {
               const { token } = response.data;
+
               setCookie(undefined, "nextauth", token, {
                 maxAge: 60 * 60 * 24 * 30, // 30 days
                 path: "/",
               });
+
               setCookie(
                 undefined,
                 "nextauth.refreshtoken",
@@ -45,6 +47,22 @@ apiAuth.interceptors.response.use(
                   path: "/",
                 }
               );
+
+              api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+              if (failedRequestQueue.length) {
+                failedRequestQueue.forEach((req) => req.onSuccess());
+                failedRequestQueue = [];
+              }
+            })
+            .catch((err) => {
+              if (failedRequestQueue.length) {
+                failedRequestQueue.forEach((req) => req.onFailure());
+                failedRequestQueue = [];
+              }
+            })
+            .finally(() => {
+              isRefreshing = false;
             });
         }
 
