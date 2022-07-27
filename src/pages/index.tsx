@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
+import { withSSRGuest } from "../utils/wishSSRGuest";
 
 type SignInFormData = {
   email: string;
@@ -77,19 +78,10 @@ export default function SignIn() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const cookies = parseCookies(ctx);
-
-  if (cookies["next-auth.token"]) {
+export const getServerSideProps: GetServerSideProps = withSSRGuest(
+  async (ctx) => {
     return {
-      redirect: {
-        destination: "/dashboard",
-        permanent: false,
-      },
+      props: {},
     };
   }
-
-  return {
-    props: {},
-  };
-};
+);
