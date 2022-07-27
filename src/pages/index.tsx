@@ -78,10 +78,10 @@ export default function SignIn() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRGuest<{
-  user: string[];
-}>(async (ctx) => {
-  return {
-    props: {},
-  };
-});
+export const getServerSideProps: GetServerSideProps = withSSRGuest(
+  async (ctx) => {
+    return {
+      props: {},
+    };
+  }
+);
