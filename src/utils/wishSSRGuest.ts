@@ -1,8 +1,14 @@
-import { GetServerSideProps } from "next";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+} from "next";
 import { parseCookies } from "nookies";
 
-export function withSSRGuest(fn: GetServerSideProps) {
-  return async (ctx) => {
+export function withSSRGuest<P>(fn: GetServerSideProps<P>) {
+  return async (
+    ctx: GetServerSidePropsContext
+  ): Promise<GetServerSidePropsResult<P>> => {
     const cookies = parseCookies(ctx);
     if (cookies["next-auth.token"]) {
       return {
