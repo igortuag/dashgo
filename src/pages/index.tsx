@@ -6,8 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../components/Form/Input";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { GetServerSideProps } from "next";
-import { parseCookies } from "nookies";
 import { withSSRGuest } from "../utils/wishSSRGuest";
 
 type SignInFormData = {
@@ -78,10 +76,8 @@ export default function SignIn() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRGuest(
-  async (ctx) => {
-    return {
-      props: {},
-    };
-  }
-);
+export const getServerSideProps = withSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});
