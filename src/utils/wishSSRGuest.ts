@@ -12,5 +12,7 @@ export function withSSRGuest(fn: GetServerSideProps) {
         },
       };
     }
+
+    return fn(ctx);
   };
 }
