@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { parseCookies, setCookie } from "nookies";
+import Router from "next/router";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { api } from "./api";
 
 let cookies = parseCookies();
@@ -12,6 +13,13 @@ export const apiAuth = axios.create({
     Authorization: `Bearer ${cookies["nextauth.token"]}`,
   },
 });
+
+export function signOut() {
+  destroyCookie(undefined, "nextauth.token");
+  destroyCookie(undefined, "nextauth.refreshToken");
+
+  Router.push("/");
+}
 
 apiAuth.interceptors.response.use(
   (response) => response,
@@ -60,6 +68,10 @@ apiAuth.interceptors.response.use(
                 failedRequestQueue.forEach((req) => req.onFailure());
                 failedRequestQueue = [];
               }
+
+              if (typeof window !== "undefined") {
+                signOut();
+              }
             })
             .finally(() => {
               isRefreshing = false;
@@ -79,7 +91,9 @@ apiAuth.interceptors.response.use(
           });
         });
       } else {
-        window.location.href = "/login";
+        if (typeof window !== "undefined") {
+          signOut();
+        }
       }
     }
     return Promise.reject(error);

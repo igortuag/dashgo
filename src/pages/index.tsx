@@ -6,8 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../components/Form/Input";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { GetServerSideProps } from "next";
-import { parseCookies } from "nookies";
+import { withSSRGuest } from "../utils/wishSSRGuest";
 
 type SignInFormData = {
   email: string;
@@ -77,19 +76,8 @@ export default function SignIn() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const cookies = parseCookies(ctx);
-
-  if (cookies["next-auth.token"]) {
-    return {
-      redirect: {
-        destination: "/dashboard",
-        permanent: false,
-      },
-    };
-  }
-
+export const getServerSideProps = withSSRGuest(async (ctx) => {
   return {
     props: {},
   };
-};
+});
