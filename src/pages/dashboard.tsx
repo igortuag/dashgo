@@ -103,7 +103,12 @@ export const getServerSideProps = withSSRAuth(async (ctx) => {
   try {
     const response = await apiClient.get("me");
   } catch (err) {
-    console.log(err instanceof AuthTokenError);
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
   }
 
   return {
