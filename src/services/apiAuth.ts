@@ -75,6 +75,8 @@ export function setupApiClient(ctx = undefined) {
 
                 if (typeof window !== "undefined") {
                   signOut();
+                } else {
+                  return Promise.reject();
                 }
               })
               .finally(() => {
