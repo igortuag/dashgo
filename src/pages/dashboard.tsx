@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { setupApiClient } from "../services/apiAuth";
+import { AuthTokenError } from "../services/errors/AuthTokenError";
 import { withSSRAuth } from "../utils/wishSSRAuth";
 
 const Chart = dynamic(() => import("react-apexcharts"), {
@@ -98,9 +99,12 @@ export default function Dashboard() {
 
 export const getServerSideProps = withSSRAuth(async (ctx) => {
   const apiClient = setupApiClient(ctx);
-  const response = await apiClient.get("me");
 
-  console.log("data >>", response);
+  try {
+    const response = await apiClient.get("me");
+  } catch (err) {
+    console.log(err instanceof AuthTokenError);
+  }
 
   return {
     props: {},
