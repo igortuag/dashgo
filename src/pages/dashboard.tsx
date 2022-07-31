@@ -1,5 +1,6 @@
 import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
+import { destroyCookie } from "nookies";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { setupApiClient } from "../services/apiAuth";
@@ -103,6 +104,9 @@ export const getServerSideProps = withSSRAuth(async (ctx) => {
   try {
     const response = await apiClient.get("me");
   } catch (err) {
+    destroyCookie(ctx, "nextauth.token");
+    destroyCookie(ctx, "nextauth.refreshToken");
+
     return {
       redirect: {
         destination: "/",
