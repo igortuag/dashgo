@@ -3,7 +3,7 @@ import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
 } from "next";
-import { parseCookies } from "nookies";
+import { destroyCookie, parseCookies } from "nookies";
 
 export function withSSRAuth<P>(fn: GetServerSideProps<P>) {
   return async (
@@ -19,6 +19,18 @@ export function withSSRAuth<P>(fn: GetServerSideProps<P>) {
       };
     }
 
-    return fn(ctx);
+    try {
+      return fn(ctx);
+    } catch (err) {
+      destroyCookie(ctx, "nextauth.token");
+      destroyCookie(ctx, "nextauth.refreshToken");
+
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
   };
 }

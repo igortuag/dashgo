@@ -101,19 +101,7 @@ export default function Dashboard() {
 export const getServerSideProps = withSSRAuth(async (ctx) => {
   const apiClient = setupApiClient(ctx);
 
-  try {
-    const response = await apiClient.get("me");
-  } catch (err) {
-    destroyCookie(ctx, "nextauth.token");
-    destroyCookie(ctx, "nextauth.refreshToken");
-
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
+  const response = await apiClient.get("me");
 
   return {
     props: {},
