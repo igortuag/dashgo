@@ -27,5 +27,5 @@ export default function useCan({ permissions, roles }: UseCanParams) {
     if (!hasAllPermissions) return false;
   }
 
-  return {};
+  return true;
 }
