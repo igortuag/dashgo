@@ -20,7 +20,7 @@ export default function useCan({ permissions, roles }: UseCanParams) {
   }
 
   if (roles?.length > 0) {
-    const hasAllPermissions = permissions.every((role) => {
+    const hasAllPermissions = permissions.some((role) => {
       return user.permissions.includes(role);
     });
 
