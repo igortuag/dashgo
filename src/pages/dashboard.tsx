@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { setupApiClient } from "../services/apiAuth";
+import useCan from "../services/hooks/useCan";
 import { withSSRAuth } from "../utils/wishSSRAuth";
 
 const Chart = dynamic(() => import("react-apexcharts"), {
@@ -65,6 +66,17 @@ const series = [
 ];
 
 export default function Dashboard() {
+  const userCanSeeMetrics = useCan({
+    permissions: ["metrics:list"],
+  });
+
+  if (!userCanSeeMetrics)
+    return (
+      <Text fontSize="lg" mb="4" pb="4">
+        You don't have permission to see metrics.
+      </Text>
+    );
+
   return (
     <Flex direction="column" h="100vh">
       <Header />
