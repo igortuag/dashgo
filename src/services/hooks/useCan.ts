@@ -11,5 +11,21 @@ export default function useCan({ permissions, roles }: UseCanParams) {
 
   if (!isAuthenticated) return false;
 
+  if (permissions?.length > 0) {
+    const hasAllPermissions = permissions.every((permission) => {
+      return user.permissions.includes(permission);
+    });
+
+    if (!hasAllPermissions) return false;
+  }
+
+  if (roles?.length > 0) {
+    const hasAllPermissions = permissions.every((role) => {
+      return user.permissions.includes(role);
+    });
+
+    if (!hasAllPermissions) return false;
+  }
+
   return {};
 }
