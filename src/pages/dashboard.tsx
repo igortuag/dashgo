@@ -1,9 +1,9 @@
 import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
+import Can from "../components/Can";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { setupApiClient } from "../services/apiAuth";
-import useCan from "../services/hooks/useCan";
 import { withSSRAuth } from "../utils/wishSSRAuth";
 
 const Chart = dynamic(() => import("react-apexcharts"), {
@@ -66,17 +66,6 @@ const series = [
 ];
 
 export default function Dashboard() {
-  const userCanSeeMetrics = useCan({
-    permissions: ["metrics:list"],
-  });
-
-  if (!userCanSeeMetrics)
-    return (
-      <Text fontSize="lg" mb="4" pb="4">
-        You don't have permission to see metrics.
-      </Text>
-    );
-
   return (
     <Flex direction="column" h="100vh">
       <Header />
@@ -84,25 +73,37 @@ export default function Dashboard() {
       <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
         <Sidebar />
 
-        <SimpleGrid
-          flex="1"
-          gap="4"
-          minChildWidth="320px"
-          alignItems="flex-start"
-        >
-          <Box p={["6", "8"]} bg="gray.800" borderRadius={8}>
-            <Text fontSize="lg" mb="4" pb="4">
-              Week subscribers
-            </Text>
-            <Chart options={options} series={series} type="area" height={160} />
-          </Box>
-          <Box p={["6", "8"]} bg="gray.800" borderRadius={8}>
-            <Text fontSize="lg" mb="4" pb="4">
-              Open rate
-            </Text>
-            <Chart options={options} series={series} type="area" height={160} />
-          </Box>
-        </SimpleGrid>
+        <Can permissions={["metrics.list"]}>
+          <SimpleGrid
+            flex="1"
+            gap="4"
+            minChildWidth="320px"
+            alignItems="flex-start"
+          >
+            <Box p={["6", "8"]} bg="gray.800" borderRadius={8}>
+              <Text fontSize="lg" mb="4" pb="4">
+                Week subscribers
+              </Text>
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={160}
+              />
+            </Box>
+            <Box p={["6", "8"]} bg="gray.800" borderRadius={8}>
+              <Text fontSize="lg" mb="4" pb="4">
+                Open rate
+              </Text>
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={160}
+              />
+            </Box>
+          </SimpleGrid>
+        </Can>
       </Flex>
     </Flex>
   );
