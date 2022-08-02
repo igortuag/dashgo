@@ -1,11 +1,16 @@
 import { ReactNode } from "react";
+import useCan from "../services/hooks/useCan";
 
 interface CanProps {
   children: ReactNode;
-  permission?: string[];
-  role?: string[];
+  permissions?: string[];
+  roles?: string[];
 }
 
-export default function Can({ children, permission, role }: CanProps) {
-  return <div>Can</div>;
+export default function Can({ children, permissions, roles }: CanProps) {
+  const userCanSeeComponent = useCan({ permissions, roles });
+
+  if (!userCanSeeComponent) return null;
+
+  return <>{children}</>;
 }
