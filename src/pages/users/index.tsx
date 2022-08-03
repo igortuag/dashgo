@@ -26,6 +26,7 @@ import Sidebar from "../../components/Sidebar";
 import { api } from "../../services/api";
 import useUsers, { getUsers } from "../../services/hooks/useUsers";
 import { queryClient } from "../../services/queryClient";
+import { withSSRAuth } from "../../utils/wishSSRAuth";
 
 export default function UserList({ users, totalCount }) {
   const [page, setPage] = useState(1);
@@ -152,10 +153,16 @@ export default function UserList({ users, totalCount }) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { users, totalCount } = await getUsers(1);
+export const getServerSideProps = withSSRAuth(
+  async (ctx) => {
+    const { users, totalCount } = await getUsers(1);
 
-  return {
-    props: { users, totalCount },
-  };
-};
+    return {
+      props: { users, totalCount },
+    };
+  },
+  {
+    permissions: ["metrics"],
+    roles: ["administrator"],
+  }
+);
