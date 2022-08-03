@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import {
   GetServerSideProps,
   GetServerSidePropsContext,
@@ -11,7 +12,9 @@ export function withSSRAuth<P>(fn: GetServerSideProps<P>) {
     ctx: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<P>> => {
     const cookies = parseCookies(ctx);
-    if (!cookies["next-auth.token"]) {
+    const token = cookies["next-auth.token"];
+
+    if (!token) {
       return {
         redirect: {
           destination: "/",
@@ -19,6 +22,8 @@ export function withSSRAuth<P>(fn: GetServerSideProps<P>) {
         },
       };
     }
+
+    const user = jwtDecode(token);
 
     try {
       return fn(ctx);
