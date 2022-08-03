@@ -153,10 +153,16 @@ export default function UserList({ users, totalCount }) {
   );
 }
 
-export const getServerSideProps = withSSRAuth(async (ctx) => {
-  const { users, totalCount } = await getUsers(1);
+export const getServerSideProps = withSSRAuth(
+  async (ctx) => {
+    const { users, totalCount } = await getUsers(1);
 
-  return {
-    props: { users, totalCount },
-  };
-});
+    return {
+      props: { users, totalCount },
+    };
+  },
+  {
+    permissions: ["metrics"],
+    roles: ["administrator"],
+  }
+);
