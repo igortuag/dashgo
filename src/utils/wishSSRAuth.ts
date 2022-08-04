@@ -32,14 +32,25 @@ export function withSSRAuth<P>(
       };
     }
 
-    const user = jwtDecode<{ permissions: string[]; roles: string[] }>(token);
-    const { permissions, roles } = options;
+    if (options) {
+      const user = jwtDecode<{ permissions: string[]; roles: string[] }>(token);
+      const { permissions, roles } = options;
 
-    const userHasValidPermissions = validateUserPermissions({
-      user,
-      permissions,
-      roles,
-    });
+      const userHasValidPermissions = validateUserPermissions({
+        user,
+        permissions,
+        roles,
+      });
+
+      if (!userHasValidPermissions) {
+        return {
+          redirect: {
+            destination: "/dashboard",
+            permanent: false,
+          },
+        };
+      }
+    }
 
     try {
       return fn(ctx);
