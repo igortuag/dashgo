@@ -13,7 +13,7 @@ export function signOut() {
   destroyCookie(undefined, "nextauth.token");
   destroyCookie(undefined, "nextauth.refreshToken");
 
-  authChannel.postMessage("logout");
+  authChannel.postMessage("signOut");
 
   Router.push("/");
 }
@@ -44,6 +44,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const { push } = useRouter();
   const [user, setUser] = useState<User>();
   const isAuthenticated = () => !!user;
+
+  useEffect(() => {
+    authChannel.onmessage = (event) => {};
+  }, []);
 
   useEffect(() => {
     const { "nextauth.token": token } = parseCookies();
