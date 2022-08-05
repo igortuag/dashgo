@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { apiAuth } from "../services/apiClient";
-import { setCookie, parseCookies } from "nookies";
+import { setCookie, parseCookies, destroyCookie } from "nookies";
 import { api } from "../services/api";
 
 type SignInCredentials = {
@@ -9,8 +9,14 @@ type SignInCredentials = {
   password: string;
 };
 
+export function signOut() {
+  destroyCookie(undefined, "nextauth.token");
+  destroyCookie(undefined, "nextauth.refreshToken");
+}
+
 type AuthContextData = {
   signIn(credentials: SignInCredentials): Promise<void>;
+  signOut: () => void;
   isAuthenticated(): boolean;
   user: User;
 };
@@ -79,7 +85,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>
+    <AuthContext.Provider value={{ signIn, isAuthenticated, signOut, user }}>
       {children}
     </AuthContext.Provider>
   );
