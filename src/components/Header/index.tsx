@@ -43,6 +43,8 @@ export default function Header() {
         <NotificationNav />
 
         <Profile showProfileData={isWideVersion} />
+
+        <button onClick={() => {}}>Sign out</button>
       </Flex>
     </Flex>
   );
