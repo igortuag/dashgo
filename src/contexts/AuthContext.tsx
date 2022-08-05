@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { apiAuth } from "../services/apiClient";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
@@ -12,6 +12,10 @@ type SignInCredentials = {
 export function signOut() {
   destroyCookie(undefined, "nextauth.token");
   destroyCookie(undefined, "nextauth.refreshToken");
+
+  authChannel.postMessage("logout");
+
+  Router.push("/");
 }
 
 type AuthContextData = {
