@@ -23,6 +23,8 @@ type AuthContextData = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
+const authChannel = new BroadcastChannel("auth");
+
 type AuthProviderProps = {
   children: ReactNode;
 };
