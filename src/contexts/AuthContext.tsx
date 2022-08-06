@@ -52,6 +52,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       switch (meessage.data) {
         case "signOut":
           signOut();
+          break;
+        default:
+          break;
       }
     };
   }, []);
