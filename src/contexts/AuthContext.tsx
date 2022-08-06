@@ -48,7 +48,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     authChannel = new BroadcastChannel("nextauth");
 
-    authChannel.onmessage = (event) => {};
+    authChannel.onmessage = (meessage) => {
+      switch (meessage.data) {
+        case "signOut":
+          signOut();
+      }
+    };
   }, []);
 
   useEffect(() => {
