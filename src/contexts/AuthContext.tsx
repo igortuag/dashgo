@@ -27,7 +27,7 @@ type AuthContextData = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-const authChannel = new BroadcastChannel("auth");
+let authChannel: BroadcastChannel;
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -46,6 +46,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const isAuthenticated = () => !!user;
 
   useEffect(() => {
+    authChannel = new BroadcastChannel("nextauth");
+
     authChannel.onmessage = (event) => {};
   }, []);
 
