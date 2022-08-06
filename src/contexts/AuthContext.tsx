@@ -102,6 +102,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
       push("/dashboard");
+
+      authChannel.postMessage("signIn");
     } catch (error) {
       console.error(error);
     }
