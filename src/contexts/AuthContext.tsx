@@ -53,6 +53,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         case "signOut":
           signOut();
           break;
+        case "signIn":
+          Router.push("/dashboard");
+          break;
         default:
           break;
       }
